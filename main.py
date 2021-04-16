@@ -34,9 +34,9 @@ for entry in logging_client.list_entries(filter_=FILTER, page_size=1000):
 
                 elif payload[2] == "DB":
                     if 'Start' in entry.payload.split("__")[3]:
-                        operation = "Database Start"
+                        operation = "Database Start_0"
                     elif 'End' in entry.payload.split("__")[3]:
-                        operation = "Database End"
+                        operation = "Database End_0"
                 else:
                     continue
                 if UUID not in UUID_list:
@@ -47,7 +47,7 @@ for entry in logging_client.list_entries(filter_=FILTER, page_size=1000):
                     ind = UUID_list.index(UUID)
                     if "Database" in operation:
                         if log_list[ind].__contains__(operation):
-                            operation = str(operation) + "1"
+                            operation = operation[:-1] + str(int(operation[-1]) + 1)
                     elif "End conversation" in operation:
                         log_list[ind]["stubApp Reported"] = time_taken
                     log_list[ind][operation] = timestamp.isoformat()
@@ -75,11 +75,11 @@ for ele in log_list:
     if delta != 0:
         ele["Database time"] = delta
 
-f = open("hud_ref_perf.csv", "w")
+f = open("hud_ref_perf_3.csv", "w")
 writer = csv.DictWriter(
     f, fieldnames=['UUID', 'Start conversation marker', 'Fulfilment Start',
-                   'Database Start', 'Database End', 'Database Start1',
-                   'Database End1', 'Database Start11', 'Database End11',
+                   'Database Start_0', 'Database End_0', 'Database Start_1',
+                   'Database End_1', 'Database Start_2', 'Database End_2',
                    'Fulfilment End', 'End conversation marker', "Database time", 'stubApp Reported', 'Network latency',
                    'fulfilment time'])
 
