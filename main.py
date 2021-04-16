@@ -3,7 +3,6 @@ import os
 from google.cloud import logging
 from datetime import datetime
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/puja/Desktop/wipro-ideas-development-878e77c1030d.json"
 
 logging_client = logging.Client()
 
