@@ -71,7 +71,9 @@ for ele in log_list:
         ele["fulfilment time"] = (datetime.fromisoformat(ele["Fulfilment End"]) - datetime.fromisoformat(
             ele["Fulfilment Start"])).microseconds // 1000
 
-    if ele.__contains__("fulfilment time") and ele.__contains__("stubApp Reported"):
+    if ele.__contains__("fulfilment time") and ele.__contains__("stubApp Reported") and ele.__contains__("detect "
+                                                                                                         "intent "
+                                                                                                         "time"):
         ele["Network latency"] = int(ele['stubApp Reported']) - int(ele["fulfilment time"]) - \
                                  int(ele["detect intent time"])
 
